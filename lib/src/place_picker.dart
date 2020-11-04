@@ -59,7 +59,8 @@ class PlacePicker extends StatefulWidget {
     this.forceSearchOnZoomChanged = false,
     this.automaticallyImplyAppBarLeading = true,
     this.autocompleteOnTrailingWhitespace = false,
-    this.hidePlaceDetailsWhenDraggingPin = true
+    this.hidePlaceDetailsWhenDraggingPin = true,
+    this.polygons,
   }) : super(key: key);
 
   final String apiKey;
@@ -79,6 +80,8 @@ class PlacePicker extends StatefulWidget {
   final ValueChanged<String> onGeocodingSearchFailed;
   final int autoCompleteDebounceInMilliseconds;
   final int cameraMoveDebounceInMilliseconds;
+
+  final Map<PolygonId, Polygon> polygons;
 
   final MapType initialMapType;
   final bool enableMapTypeButton;
@@ -384,6 +387,7 @@ class _PlacePickerState extends State<PlacePicker> {
         searchBarController.reset();
       },
       onPlacePicked: widget.onPlacePicked,
+      polygons: widget.polygons ?? Map<PolygonId, Polygon>(),
     );
   }
 }
